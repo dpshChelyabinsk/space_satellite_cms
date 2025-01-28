@@ -1,0 +1,39 @@
+.container {
+  position: absolute;
+  z-index: 2;
+  width: 8.81041666666667%;
+  height: 6.52037037037037%;
+  top: 44.66111111111111%;
+  left: 28.4921875%;
+  animation: movePlanet 9s ease-in-out infinite;
+}
+
+@keyframes movePlanet {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, 12px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 2560px) {
+  .container {
+    top: 51.02314814814815%;
+  }
+}
+
+@media (max-width: 1366px) {
+  .container {
+    top: 16.02314814814815%;
+  }
+}
+
+@media (max-width: 730px) {
+  .container {
+    top: 43.02314814814815%;
+  }
+}

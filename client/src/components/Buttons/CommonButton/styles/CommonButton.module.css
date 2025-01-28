@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  height: 100%;
+  color: var(--pure-white);
+  background-color: var(--royal-lilac);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  border: none;
+  border-radius: 40px;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.container:hover {
+  cursor: pointer;
+  background-color: var(--sunset-orange);
+}

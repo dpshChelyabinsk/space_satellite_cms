@@ -1,0 +1,28 @@
+.container {
+  position: absolute;
+  z-index: 2;
+  width: 18.85416666666667%;
+  height: 35.55555555555556%;
+  top: 14.16666666666667%;
+  left: 7.34375%;
+  animation: movePlanet 12s ease-in-out infinite;
+}
+
+@keyframes movePlanet {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(7px, 15px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 1366px) {
+  .container {
+    top: 10.02314814814815%;
+    left: 0.875%;
+  }
+}

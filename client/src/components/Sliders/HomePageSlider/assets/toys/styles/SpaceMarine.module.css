@@ -1,0 +1,28 @@
+.container{
+  position: absolute;
+  z-index: 2;
+  width: 9.12708333333333%;
+  height: 15.43055555555556%;
+  top: 28.61111111111111%;
+  left: 21.875%;
+  animation: rotateCowSmouNauft 7s ease-in-out infinite;
+}
+
+@keyframes rotateCowSmouNauft {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 1366px) {
+  .container {
+    top: 22.02314814814815%;
+    left: 14.875%;
+  }
+}
