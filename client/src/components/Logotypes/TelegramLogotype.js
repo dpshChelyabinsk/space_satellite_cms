@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import TelegramSVG from "../../assets/TelegramSVG";
+import TelegramSVG from "../../assets/Common/Footer/TelegramSVG";
 
 const StyledLogo = styled.div`
   width: 48px;

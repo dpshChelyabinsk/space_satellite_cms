@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import YouTubeSVG from "../../assets/YouTubeSVG";
+import YouTubeSVG from "../../assets/Common/Footer/YouTubeSVG";
 
 const StyledLogo = styled.div`
   width: 48px;

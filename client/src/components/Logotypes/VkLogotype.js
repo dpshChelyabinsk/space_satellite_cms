@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import VkSVG from "../../assets/VkSVG";
+import VkSVG from "../../assets/Common/Footer/VkSVG";
 
 const StyledLogo = styled.div`
   width: 48px;

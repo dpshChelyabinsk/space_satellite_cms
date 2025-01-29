@@ -1,5 +1,5 @@
 import React from 'react';
-import WhatsAppSVG from "../../assets/WhatsAppSVG";
+import WhatsAppSVG from "../../assets/Common/Footer/WhatsAppSVG";
 import styled from "styled-components";
 
 const StyledLogo = styled.div`

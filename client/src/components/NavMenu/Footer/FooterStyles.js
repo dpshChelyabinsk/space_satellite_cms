@@ -15,6 +15,10 @@ export const StyledSmallLink = styled(Link)`
   &:hover {
     color: var(--sunset-orange);
   }
+
+  @media (max-width: 480px) {
+    height: 20.72727272727273%;
+  }
 `;
 
 export const StyledAnchor = styled.a`
@@ -84,6 +88,10 @@ export const StyledWrapperAll = styled.div`
   @media (max-width: 1020px) {
     grid-template-columns: 1fr;
   }
+
+  @media (max-width: 480px) {
+    grid-gap: 70px 16px;
+  }
 `;
 
 export const StyledWrapperBox = styled.div`
@@ -106,7 +114,8 @@ export const StyledWrapperBox = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+
+  @media (max-width: 821px) {
     &:nth-child(1) {
       grid-column: 1;
       grid-row: 2;
@@ -156,4 +165,11 @@ export const StyledWrapperCredits = styled.div`
   font-weight: bold;
   font-size: 16px;
   color: var(--royal-lilac);
+
+
+  @media (max-width: 821px) {
+    margin: 15px;
+    font-size: 14px;
+    padding: 0;
+  }
 `;

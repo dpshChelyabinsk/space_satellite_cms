@@ -37,7 +37,7 @@ const NavHeader = () => {
                         className={({ isActive }) =>
                             isActive ? `${classes.navItem} ${classes.active}` : classes.navItem
                         }
-                        onClick={() => setMenuOpen(false)} // Закрытие меню при клике
+                        onClick={() => setMenuOpen(false)}
                     >
                         Отследить спутник
                     </NavLink>

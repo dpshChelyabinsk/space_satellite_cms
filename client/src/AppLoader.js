@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import App from './App';
+import React, {useEffect, useState} from 'react';
 import Loader from './components/Loaders/Loader';
+import Router from "./router/Router";
 
 const AppLoader = () => {
     const [loading, setLoading] = useState(true);
@@ -14,9 +14,9 @@ const AppLoader = () => {
     }, []);
 
     if (loading) {
-        return <Loader />;
+        return <Loader/>;
     }
-    return <App />;
+    return <Router/>;
 };
 
 export default AppLoader;
