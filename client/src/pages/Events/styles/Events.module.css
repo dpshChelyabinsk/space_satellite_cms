@@ -1,8 +1,24 @@
 .eventContainer {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 850px;
+}
+
+.eventWrapper {
+  display: flex;
   flex-wrap: wrap;
   gap: 3.92857142857143%;
   width: 100%;
   height: 71.1864406779661%;
   min-height: 600px;
+}
+
+.notFound {
+  text-align: center;
+  margin: 15% auto;
+  font-family: var(--font-family);
+  font-size: 32px;
+  color: var(--dark-night);
 }

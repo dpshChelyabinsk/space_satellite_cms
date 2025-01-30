@@ -103,48 +103,67 @@ const Events = () => {
 
     const uniqueTypes = [...new Set(events.map(event => event.attributes.type))];
 
+    const [showTimeoutMessage, setShowTimeoutMessage] = useState(false); // Состояние для отображения сообщения
+
+    useEffect(() => {
+        // Устанавливаем таймер на 15 секунд
+        const timeoutId = setTimeout(() => {
+            // Если события не загрузились, показываем сообщение
+            if (currentEvents.length === 0) {
+                setShowTimeoutMessage(true);
+            }
+        }, 15000); // 15 секунд
+
+        // Очищаем таймер при размонтировании компонента
+        return () => clearTimeout(timeoutId);
+    }, [currentEvents]);
+
     return (<MainWrapper>
         <ContentContainer>
-            <CommonHeader>Подберите мероприятие</CommonHeader>
-            <EventFilter
-                filter={filter}
-                timeFilter={timeFilter}
-                dateFilter={dateFilter}
-                uniqueTypes={uniqueTypes}
-                uniqueTimes={uniqueTimes}
-                uniqueDates={uniqueDates}
-                onFilterChange={handleFilterChange}
-                onTimeChange={handleTimeFilterChange}
-                onDateChange={handleDateFilterChange}
-                onReset={handleResetFilters}
-            />
             <div className={classes.eventContainer}>
-                {currentEvents.length > 0 ? (currentEvents.map(eventItem => {
-                    const {date_start, date_finish, type} = eventItem.attributes;
-                    const options = {
-                        year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',
-                    };
-                    const startDate = new Date(date_start).toLocaleString('ru-RU', options);
-                    const endDate = date_finish ? ` - ${new Date(date_finish).toLocaleString('ru-RU', options)}` : '';
-                    return (<EventCard
-                        key={eventItem.id}
-                        image={`${API_URL}${eventItem.attributes.photo.data.attributes.url}`}
-                        type={type}
-                        event={() => openModal(eventItem)}
-                        link={`/events/${eventItem.id}`}
-                        startDate={startDate}
-                        endDate={endDate}
-                        title={eventItem.attributes.title}
-                        place={eventItem.attributes.place}
-                    />);
-                })) : (<Loader/>)}
+                <CommonHeader>Подберите мероприятие</CommonHeader>
+                <EventFilter
+                    filter={filter}
+                    timeFilter={timeFilter}
+                    dateFilter={dateFilter}
+                    uniqueTypes={uniqueTypes}
+                    uniqueTimes={uniqueTimes}
+                    uniqueDates={uniqueDates}
+                    onFilterChange={handleFilterChange}
+                    onTimeChange={handleTimeFilterChange}
+                    onDateChange={handleDateFilterChange}
+                    onReset={handleResetFilters}
+                />
+                <div className={classes.eventWrapper}>
+                    {currentEvents.length > 0 ? (currentEvents.map(eventItem => {
+                        const {date_start, date_finish, type} = eventItem.attributes;
+                        const options = {
+                            year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',
+                        };
+                        const startDate = new Date(date_start).toLocaleString('ru-RU', options);
+                        const endDate = date_finish ? ` - ${new Date(date_finish).toLocaleString('ru-RU', options)}` : '';
+                        return (<EventCard
+                            key={eventItem.id}
+                            image={`${API_URL}${eventItem.attributes.photo.data.attributes.url}`}
+                            type={type}
+                            event={() => openModal(eventItem)}
+                            link={`/events/${eventItem.id}`}
+                            startDate={startDate}
+                            endDate={endDate}
+                            title={eventItem.attributes.title}
+                            place={eventItem.attributes.place}
+                        />);
+                    })) : (
+                        showTimeoutMessage ? <div className={classes.notFound}>События не найдены</div> : <Loader />
+                    )}
+                </div>
+                <EventPagination
+                    filteredEvents={filteredEvents}
+                    eventsPerPage={eventsPerPage}
+                    currentPage={currentPage}
+                    paginate={paginate}
+                />
             </div>
-            <EventPagination
-                filteredEvents={filteredEvents}
-                eventsPerPage={eventsPerPage}
-                currentPage={currentPage}
-                paginate={paginate}
-            />
         </ContentContainer>
         {isModalOpen && (<ModalWrapper>
             <GonnaEvent eventId={selectedEvent.id} eventName={selectedEvent.attributes.title}/>

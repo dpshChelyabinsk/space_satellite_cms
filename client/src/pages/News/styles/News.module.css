@@ -8,6 +8,16 @@
   margin-top: 50px;
 }
 
+/*.content {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  width: 100%;*/
+/*  height: fit-content;*/
+/*  min-height: 82vh;*/
+/*  background-color: rgba(123, 183, 38, 0.46);*/
+/*}*/
+
 .newsRow {
   width: 100%;
   height: 150px;

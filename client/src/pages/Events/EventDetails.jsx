@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import classes from "./styles/EventDetails.module.css"
 import {Link, useParams} from 'react-router-dom';
 import {getEventById} from '../../services/eventService';
 import Loader from '../../components/Loaders/Loader';
@@ -48,7 +49,7 @@ const EventDetailsPageWrapper = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  width: 72.91666666666667%;
+  width: 100%;
   max-width: 1400px;
   height: 39.25925925925926%;
   min-height: 545px;
@@ -202,45 +203,47 @@ const EventDetails = () => {
                     <TitleHeader>{eventName}</TitleHeader>
                 </EventTitleBox>
             </EventPhoto>
-            <EventDetailsPageWrapper>
-                <AboutEvent>
-                    <DateEventBox>
-                        <AboutHeader>
-                            адрес и время
-                        </AboutHeader>
-                        <Title>
-                            Адрес: {eventPlace}
-                        </Title>
-                        <TitleBox>
-                            <DateBox>
-                                <Title>
-                                    Начало: {eventStartDate}
-                                </Title>
-                                <Title>
-                                    Конец: {eventEndDate}
-                                </Title>
-                            </DateBox>
+            <div className={classes.container}>
+                <EventDetailsPageWrapper>
+                    <AboutEvent>
+                        <DateEventBox>
+                            <AboutHeader>
+                                адрес и время
+                            </AboutHeader>
                             <Title>
-                                Цена: {eventPrice}
+                                Адрес: {eventPlace}
                             </Title>
-                        </TitleBox>
-                        <Title>
-                            Примечание: {eventNotice}
-                        </Title>
-                    </DateEventBox>
-                    <DescriptionEventBox>
-                        <AboutHeader>
-                            о мероприятии
-                        </AboutHeader>
-                        <Title>
-                            {eventDescription}
-                        </Title>
-                    </DescriptionEventBox>
-                </AboutEvent>
-                <RecordWrapper>
-                    <GonnaEvent eventId={id} eventName={eventName}/>
-                </RecordWrapper>
-            </EventDetailsPageWrapper>
+                            <TitleBox>
+                                <DateBox>
+                                    <Title>
+                                        Начало: {eventStartDate}
+                                    </Title>
+                                    <Title>
+                                        Конец: {eventEndDate}
+                                    </Title>
+                                </DateBox>
+                                <Title>
+                                    Цена: {eventPrice}
+                                </Title>
+                            </TitleBox>
+                            <Title>
+                                Примечание: {eventNotice}
+                            </Title>
+                        </DateEventBox>
+                        <DescriptionEventBox>
+                            <AboutHeader>
+                                о мероприятии
+                            </AboutHeader>
+                            <Title>
+                                {eventDescription}
+                            </Title>
+                        </DescriptionEventBox>
+                    </AboutEvent>
+                    <RecordWrapper>
+                        <GonnaEvent eventId={id} eventName={eventName}/>
+                    </RecordWrapper>
+                </EventDetailsPageWrapper>
+            </div>
         </EventDetailsWrapper>
     );
 };
