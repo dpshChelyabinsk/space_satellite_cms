@@ -2,4 +2,5 @@
   color: var(--sunset-orange);
   font-family: var(--font-family);
   font-weight: bold;
+  margin: 15px 0;
 }

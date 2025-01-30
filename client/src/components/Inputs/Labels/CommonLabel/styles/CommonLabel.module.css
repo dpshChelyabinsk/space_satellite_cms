@@ -1,0 +1,6 @@
+.container {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--dark-night);
+  margin-bottom: 5px;
+}

@@ -1,6 +1,9 @@
 .container {
-  width: 100px;
+  width: 103px;
   height: 70px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 3px 6px;
 }
 
 .text {
@@ -29,6 +32,7 @@
   .container {
     width: 100px;
     height: 70px;
+    background-color: rgba(255, 255, 255, 0);
   }
 
   .logo {
@@ -44,6 +48,5 @@
   .active {
     color: var(--sunset-orange);
     fill: var(--sunset-orange);
-    -webkit-text-stroke: 0px var(--pure-white);
   }
 }

@@ -7,7 +7,6 @@ const NavHeader = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-
         if (menuOpen) {
             document.body.classList.add('no-scroll');
         } else {
@@ -57,7 +56,7 @@ const NavHeader = () => {
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
-                            isActive ? `${classes.navItem} ${classes.active}` : classes.navItem
+                            isActive ? `${classes.navItemLogo} ${classes.active}` : classes.navItemLogo
                         }
                         onClick={() => setMenuOpen(false)}
                     >
@@ -66,7 +65,7 @@ const NavHeader = () => {
                 </li>
                 <li>
                     <NavLink
-                        to="/gallery"
+                        to="/albums"
                         className={({ isActive }) =>
                             isActive ? `${classes.navItem} ${classes.active}` : classes.navItem
                         }

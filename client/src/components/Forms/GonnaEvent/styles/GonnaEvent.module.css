@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  max-width: 687px;
+  height: 100%;
+  min-height: 424px;
+  font-family: var(--font-family);
+  padding: 20px;
+}
+
+.header {
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--dark-night);
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  height: 87.26415094339623%;
+  min-height: 298px;
+}
+
+.form__inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  height: 19.81132075471698%;
+}
+
+.form__radioGroup {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}

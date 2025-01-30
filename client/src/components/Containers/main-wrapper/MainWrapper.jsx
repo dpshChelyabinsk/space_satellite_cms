@@ -4,7 +4,9 @@ import classes from './style/Wrapper.module.css';
 const MainWrapper = ({ children }) => {
     return (
         <div className={classes.container}>
-            {children}
+            <div className={`${classes.image} ${classes.leftImage}`}></div>
+                {children}
+            <div className={`${classes.image} ${classes.rightImage}`}></div>
         </div>
     );
 };

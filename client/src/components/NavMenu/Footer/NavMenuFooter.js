@@ -28,7 +28,7 @@ const NavMenuFooter = () => {
                     <StyledWrapperBox>
                         <SmallNavLink dir="/satellite" location={location}>Отследить спутник</SmallNavLink>
                         <SmallNavLink dir="/events" location={location}>Мероприятия</SmallNavLink>
-                        <SmallNavLink dir="/gallery" location={location}>Галерея</SmallNavLink>
+                        <SmallNavLink dir="/albums" location={location}>Галерея</SmallNavLink>
                         <SmallNavLink dir="/news" location={location}>Новости</SmallNavLink>
                         <SmallNavLink dir="/about" location={location}>О нас</SmallNavLink>
                     </StyledWrapperBox>

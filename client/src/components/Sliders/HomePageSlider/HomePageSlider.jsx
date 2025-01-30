@@ -13,7 +13,7 @@ const HomePageSlider = ({children}) => {
                 organicArrows={true}
                 play={true}
                 cancelOnInteraction={false}
-                interval={0}
+                interval={15000}
             >
                 {children}
             </AutoplaySlider>

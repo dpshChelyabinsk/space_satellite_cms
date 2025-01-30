@@ -21,28 +21,37 @@
 }
 
 .navItem {
-  width: fit-content;
-  height: 21.25%;
   color: var(--dark-night);
   fill: var(--dark-night);
-  -webkit-text-stroke: 0.3px var(--pure-white);
   font-family: var(--font-family);
   font-weight: bold;
   font-size: 26px;
   text-decoration: none;
   transition: ease-in-out 250ms;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  padding: 3px;
+}
+
+.navItemLogo {
+  color: var(--dark-night);
+  fill: var(--dark-night);
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 26px;
+  text-decoration: none;
+  transition: ease-in-out 250ms;
+  padding: 3px;
 }
 
 .navItem:hover {
   color: var(--sunset-orange);
   fill: var(--sunset-orange);
-  -webkit-text-stroke: 0px var(--pure-white);
 }
 
 .active {
   color: var(--sunset-orange);
   fill: var(--sunset-orange);
-  -webkit-text-stroke: 0px var(--pure-white);
 }
 
 .navBurger {
@@ -81,7 +90,7 @@
 
 @media (max-width: 1024px) {
   .container {
-    width: 82.91666666666667%;
+    width: 85.91666666666667%;
   }
 }
 
@@ -128,5 +137,6 @@
   .navItem {
     font-size: 28px;
     color: var(--pure-white);
+    background-color: rgba(255, 255, 255, 0);
   }
 }

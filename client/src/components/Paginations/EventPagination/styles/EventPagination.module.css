@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  width: fit-content;
+  max-width: 900px;
+  height: 4.2%;
+  margin-top: 3%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  background-color: rgba(0, 0, 0, 0);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid rgba(0, 0, 0, 0);
+  font-size: 24px;
+  font-family: var(--font-family);
+  font-weight: bold;
+}
+
+.active {
+  border-bottom: 2px solid var(--dark-night);
+}
+
+.buttons:hover {
+  cursor: pointer;
+}

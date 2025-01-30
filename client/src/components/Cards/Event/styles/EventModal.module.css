@@ -1,0 +1,140 @@
+.container {
+  width: 30.71428571428571%;
+  height: 47.61904761904762%;
+  min-height: 270px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.containerImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  position: relative;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  text-decoration: none;
+  transition: background-color 0.25s;
+}
+
+.containerImage:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  font-family: var(--font-family);
+  color: var(--pure-white);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.contentTop {
+  display: flex;
+  justify-content: space-between;
+  width: 90.69767441860465%;
+  height: 21.26333333333333%;
+}
+
+.chipBox {
+  width: 17.69230769230769%;
+  height: 21.26333333333333%;
+}
+
+.typeChip {
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--honey-glow);
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+.contentBottom {
+  width: 90.69767441860465%;
+  height: 44.07274964432653%;
+}
+
+.buttonsBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 35.12820512820513%;
+  height: 100%;
+}
+
+.buttonWrapper {
+  width: 100%;
+  height: 43.75293933218373%;
+}
+
+.contentButton {
+  width: 100%;
+  height: 100%;
+  color: var(--pure-white);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  border: none;
+  border-radius: 40px;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.record {
+  background-color: var(--sunset-orange);
+}
+
+.record:hover {
+  background-color: var(--lavender-sky);
+  cursor: pointer;
+}
+
+.detail {
+  background-color: var(--royal-lilac);
+}
+
+.detail:hover {
+  background-color: var(--sunset-orange);
+  cursor: pointer;
+}
+
+.date {
+
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.placeBox {
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  display: flex;
+  margin-top: 2.04309893561333%;
+}
+
+.place {
+  height: 18.42105263157895%;
+  margin-left: 4%;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

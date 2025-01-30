@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import { getEventById } from '../../services/eventService';
+import {getEventById} from '../../services/eventService';
 import Loader from '../../components/Loaders/Loader';
 import styled from 'styled-components';
-import RecordBlock from "../../components/RecordBlock";
-import { API_URL } from '../../config/API_CONFIG';
+import {API_URL} from '../../config/API_CONFIG';
 import Button from "../../components/UI/Button";
 import Back from '../../assets/Common/arrow-back.svg'
+import GonnaEvent from "../../components/Forms/GonnaEvent/GonnaEvent";
 
 const EventErrorWrapper = styled.div`
   display: flex;
@@ -136,13 +136,13 @@ const BackImage = styled.img`
 `
 
 const EventDetails = () => {
-    const { id } = useParams();
+    const {id} = useParams();
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchEvent = async () => {
-            const data = await getEventById(id, 'photo'); // Добавим 'photo' как параметр для populate
+            const data = await getEventById(id, 'photo');
             setEvent(data);
             setLoading(false);
         };
@@ -150,7 +150,7 @@ const EventDetails = () => {
     }, [id]);
 
     if (loading) {
-        return <Loader />;
+        return <Loader/>;
     }
 
     if (!event) {
@@ -159,8 +159,20 @@ const EventDetails = () => {
 
     const eventName = event.attributes.title;
     const eventDescription = event.attributes.description;
-    const eventStartDate = new Date(event.attributes.date_start).toLocaleString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' });
-    const eventEndDate = event.attributes.date_finish ? new Date(event.attributes.date_finish).toLocaleString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' }) : 'N/A';
+    const eventStartDate = new Date(event.attributes.date_start).toLocaleString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+    });
+    const eventEndDate = event.attributes.date_finish ? new Date(event.attributes.date_finish).toLocaleString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+    }) : 'N/A';
     const eventPlace = event.attributes.place;
     const eventPrice = event.attributes.price || 'Бесплатно';
     const eventNotice = event.attributes.notice;
@@ -226,7 +238,7 @@ const EventDetails = () => {
                     </DescriptionEventBox>
                 </AboutEvent>
                 <RecordWrapper>
-                    <RecordBlock eventId={id} eventName={eventName} />
+                    <GonnaEvent eventId={id} eventName={eventName}/>
                 </RecordWrapper>
             </EventDetailsPageWrapper>
         </EventDetailsWrapper>
