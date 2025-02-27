@@ -1,140 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import classes from "./styles/EventDetails.module.css"
 import {Link, useParams} from 'react-router-dom';
 import {getEventById} from '../../services/eventService';
 import Loader from '../../components/Loaders/Loader';
-import styled from 'styled-components';
 import {API_URL} from '../../config/API_CONFIG';
-import Button from "../../components/UI/Button";
+import classes from './styles/EventDetails.module.css';
+
 import Back from '../../assets/Common/arrow-back.svg'
 import GonnaEvent from "../../components/Forms/GonnaEvent/GonnaEvent";
-
-const EventErrorWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  position: absolute;
-  z-index: 200;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const EventDetailsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-  width: 100%;
-  height: 100%;
-`;
-
-const EventPhoto = styled.div`
-  display: flex;
-  justify-content: center;
-  top: 160px;
-  width: 100%;
-  height: 30.09259259259259%;
-  min-height: 325px;
-  margin-top: 160px;
-  object-fit: cover;
-  background-size: cover;
-  background-position: center;
-  background-image: url(${props => props.$background});
-`;
-
-const EventDetailsPageWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1400px;
-  height: 39.25925925925926%;
-  min-height: 545px;
-`;
-
-const AboutEvent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-  width: 49.07142857142857%;
-  height: fit-content;
-  min-height: 348px;
-  font-family: var(--font-family);
-  color: var(--dark-night);
-`;
-
-const RecordWrapper = styled.div`
-  width: 49.07142857142857%;
-  max-width: 687px;
-  height: 100%;
-  min-height: 424px;
-`
-
-const DateEventBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  height: 48.27586206896552%;
-  min-height: 160px;
-`;
-
-const DescriptionEventBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  height: fit-content;
-  min-height: 120px;
-`;
-
-const AboutHeader = styled.h2`
-  text-transform: uppercase;
-  font-size: 32px;
-  font-weight: 400;
-`;
-
-const TitleBox = styled.div`
-  display: flex;
-  gap: 150px;
-`;
-
-const Title = styled.p`
-  font-size: 20px;
-  font-weight: 400;
-`;
-
-const DateBox = styled.div`
-  text-align: left;
-`;
-
-const EventTitleBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 75%;
-  max-width: 1400px;
-  height: 100%;
-  padding: 15px 0;
-`;
-
-const TitleHeader = styled.h2`
-  color: white;
-  font-size: 48px;
-  font-family: var(--font-family);
-`;
-
-const ButtonWrapper = styled.div`
-  width: 18.57142857142857%;
-  max-width: 120px;
-  height: 16%;
-`
-
-const BackImage = styled.img`
-`
+import MainWrapper from "../../components/Containers/main-wrapper/MainWrapper";
+import ContentContainer from "../../components/Containers/content-container/ContentContainer";
+import CommonButton from "../../components/Buttons/CommonButton/CommonButton";
 
 const EventDetails = () => {
     const {id} = useParams();
@@ -155,7 +30,7 @@ const EventDetails = () => {
     }
 
     if (!event) {
-        return <EventErrorWrapper>Event not found</EventErrorWrapper>;
+        return <div className={classes.errorBox}>Event not found</div>;
     }
 
     const eventName = event.attributes.title;
@@ -173,78 +48,75 @@ const EventDetails = () => {
         year: 'numeric',
         hour: 'numeric',
         minute: 'numeric'
-    }) : 'N/A';
+    }) : false;
     const eventPlace = event.attributes.place;
-    const eventPrice = event.attributes.price || 'Бесплатно';
     const eventNotice = event.attributes.notice;
     const eventPhotoUrl = event.attributes.photo?.data ? `${API_URL}${event.attributes.photo.data.attributes.url}` : null;
 
     console.log("Event Data:", event);
 
     return (
-        <EventDetailsWrapper>
-            <EventPhoto $background={eventPhotoUrl}>
-                <EventTitleBox>
-                    <ButtonWrapper>
-                        <Link to={`/events`}>
-                            <Button
-                                $color={'var(--royal-lilac)'}
-                                $hoverColor={'var(--sunset-orange)'}
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <BackImage src={Back} alt='image'/>
-                            </Button>
-                        </Link>
-                    </ButtonWrapper>
-                    <TitleHeader>{eventName}</TitleHeader>
-                </EventTitleBox>
-            </EventPhoto>
-            <div className={classes.container}>
-                <EventDetailsPageWrapper>
-                    <AboutEvent>
-                        <DateEventBox>
-                            <AboutHeader>
-                                адрес и время
-                            </AboutHeader>
-                            <Title>
-                                Адрес: {eventPlace}
-                            </Title>
-                            <TitleBox>
-                                <DateBox>
-                                    <Title>
-                                        Начало: {eventStartDate}
-                                    </Title>
-                                    <Title>
-                                        Конец: {eventEndDate}
-                                    </Title>
-                                </DateBox>
-                                <Title>
-                                    Цена: {eventPrice}
-                                </Title>
-                            </TitleBox>
-                            <Title>
-                                Примечание: {eventNotice}
-                            </Title>
-                        </DateEventBox>
-                        <DescriptionEventBox>
-                            <AboutHeader>
-                                о мероприятии
-                            </AboutHeader>
-                            <Title>
-                                {eventDescription}
-                            </Title>
-                        </DescriptionEventBox>
-                    </AboutEvent>
-                    <RecordWrapper>
-                        <GonnaEvent eventId={id} eventName={eventName}/>
-                    </RecordWrapper>
-                </EventDetailsPageWrapper>
-            </div>
-        </EventDetailsWrapper>
+        <MainWrapper>
+            <div className={classes.eventPhoto} style={{backgroundImage: `url("${eventPhotoUrl}")`}} />
+            <ContentContainer>
+                <div className={classes.container}>
+                    <div className={classes.titleBox}>
+                        <div className={classes.buttonWrapper}>
+                            <Link to={`/events`}>
+                                <CommonButton
+                                    style={{
+                                        minWidth: '112px',
+                                        maxHeight: '52px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <img src={Back} alt='back arrow'/>
+                                </CommonButton>
+                            </Link>
+                        </div>
+                        <h2 className={classes.titleBoxHeader}>{eventName}</h2>
+                    </div>
+                    <div className={classes.eventDetailContent}>
+                        <div className={classes.details}>
+                            <div className={classes.details__container}>
+                                <h3 className={classes.details__header}>
+                                    адрес и время
+                                </h3>
+                                <p className={classes.date__line}>
+                                    Адрес: {eventPlace}
+                                </p>
+                                <div className={classes.date}>
+                                    <div style={{textAlign: 'left'}}>
+                                        <p className={classes.date__line}>
+                                            Начало: {eventStartDate}
+                                        </p>
+                                        <p className={classes.date__line}>
+                                            {eventEndDate ? `Конец: ${eventEndDate}` : ''}
+                                        </p>
+                                    </div>
+                                </div>
+                                <p className={classes.date__line}>
+                                    Примечание: {eventNotice}
+                                </p>
+                            </div>
+                            <div className={classes.details__container}>
+                                <h3 className={classes.details__header}>
+                                    о мероприятии
+                                </h3>
+                                <div className={classes.date__line}>
+                                    {eventDescription}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={classes.event__form}>
+                            <GonnaEvent eventId={id} eventName={eventName}/>
+                        </div>
+                    </div>
+                </div>
+            </ContentContainer>
+        </MainWrapper>
     );
 };
 

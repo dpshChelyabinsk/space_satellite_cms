@@ -1,4 +1,4 @@
-import classes from "./style/ContentContainer.module.css"
+import classes from "./styles/ContentContainer.module.css"
 
 const ContentContainer = ({ children }) => {
     return (

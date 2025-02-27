@@ -1,10 +1,133 @@
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 72.91666666666667%;
+  width: 100%;
   max-width: 1400px;
   height: 81.94444444444444%;
   min-height: 84vh;
-  background-color: rgba(255, 255, 255, 0.46);
+  z-index: 15;
+}
+
+.errorBox {
+  background-color: #fa1313;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  position: absolute;
+  z-index: 16;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.eventPhoto {
+  position: absolute;
+  width: 100%;
+  height: 20.09259259259259%;
+  min-height: 325px;
+  margin-top: 170px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 10;
+}
+
+.titleBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1400px;
+  height: 300px;
+  min-height: 325px;
+}
+
+.buttonWrapper {
+  width: 18.57142857142857%;
+  max-width: 120px;
+  height: 16%;
+}
+
+.titleBoxHeader {
+  color: white;
+  font-size: 48px;
+  font-family: var(--font-family);
+}
+
+.eventDetailContent {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  height: 39.25925925925926%;
+  min-height: 545px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  width: 49.07142857142857%;
+  height: fit-content;
+  min-height: 348px;
+  padding: 20px;
+  font-family: var(--font-family);
+  color: var(--dark-night);
+}
+
+.details__container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 48.27586206896552%;
+  min-height: 160px;
+}
+
+.date {
+  display: flex;
+  gap: 150px;
+}
+
+.details__header {
+  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.date__line {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.event__form {
+  width: 49.07142857142857%;
+  max-width: 687px;
+  height: 100%;
+  min-height: 424px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    height: 95vh;
+  }
+
+  .details {
+    flex-direction: row;
+    width: 100%;
+    min-height: 250px;
+  }
+
+  .eventDetailContent {
+    flex-direction:column;
+  }
+
+  .event__form {
+    width: 100%;
+  }
 }

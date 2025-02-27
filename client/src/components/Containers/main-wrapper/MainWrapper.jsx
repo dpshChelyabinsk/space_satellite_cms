@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './style/Wrapper.module.css';
+import classes from './styles/Wrapper.module.css';
 
 const MainWrapper = ({ children }) => {
     return (
