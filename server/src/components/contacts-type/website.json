@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_contacts_type_websites",
+  "info": {
+    "displayName": "Website",
+    "icon": "globe"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true,
+      "default": "https://chel-dpsh.ru/"
+    }
+  }
+}

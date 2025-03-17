@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_contacts_type_mail",
+  "info": {
+    "displayName": "Mail",
+    "icon": "envelop"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "email",
+      "required": true
+    }
+  }
+}

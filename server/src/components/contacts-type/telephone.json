@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_contacts_type_telephones",
+  "info": {
+    "displayName": "Telephone",
+    "icon": "phone"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "biginteger",
+      "required": true
+    }
+  }
+}
