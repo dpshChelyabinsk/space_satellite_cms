@@ -5,7 +5,7 @@ const About = () => {
     return (
         <MainWrapper>
             <ContentContainer>
-                About
+                About sadadasdasdasd
             </ContentContainer>
         </MainWrapper>
     );

@@ -1,6 +1,0 @@
-{
-  "Auth.form.welcome.title": "Добро пожаловать!",
-  "Auth.form.welcome.subtitle": "Войдите в свою учётную запись",
-  "global.plugins": "Плагины",
-  "app.components.LeftMenu.navbrand.title": "Админ-панель Strapi"
-}
