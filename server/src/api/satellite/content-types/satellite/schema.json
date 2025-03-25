@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "satellites",
+  "info": {
+    "singularName": "satellite",
+    "pluralName": "satellites",
+    "displayName": "Satellite",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "default": "UMKA"
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "default": "RS40S"
+    },
+    "firstLine": {
+      "type": "string",
+      "required": true,
+      "default": "1 57172U 23091G   25083.84858341  .00015221  00000+0  83848-3 0  9990"
+    },
+    "secondLine": {
+      "type": "string",
+      "default": "2 57172  97.5685 139.6562 0013860 235.4522 124.5402 15.14026539 95869",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "default": "http://celestrak.org/NORAD/elements/amateur.txt",
+      "required": true
+    }
+  }
+}

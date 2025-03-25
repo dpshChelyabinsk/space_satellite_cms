@@ -2,11 +2,12 @@
   "collectionName": "components_contacts_type_telephones",
   "info": {
     "displayName": "Telephone",
-    "icon": "phone"
+    "icon": "",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "value": {
+    "number": {
       "type": "biginteger",
       "required": true
     }

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_contacts_type_telegrams",
+  "info": {
+    "displayName": "telegram",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "username": {
+      "type": "string",
+      "required": true,
+      "default": "#"
+    }
+  }
+}

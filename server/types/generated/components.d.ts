@@ -3,22 +3,49 @@ import type { Schema, Struct } from '@strapi/strapi';
 export interface ContactsTypeMail extends Struct.ComponentSchema {
   collectionName: 'components_contacts_type_mail';
   info: {
+    description: '';
     displayName: 'Mail';
-    icon: 'envelop';
+    icon: '';
   };
   attributes: {
-    value: Schema.Attribute.Email & Schema.Attribute.Required;
+    mail: Schema.Attribute.Email & Schema.Attribute.Required;
+  };
+}
+
+export interface ContactsTypeTelegram extends Struct.ComponentSchema {
+  collectionName: 'components_contacts_type_telegrams';
+  info: {
+    description: '';
+    displayName: 'telegram';
+  };
+  attributes: {
+    username: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'#'>;
   };
 }
 
 export interface ContactsTypeTelephone extends Struct.ComponentSchema {
   collectionName: 'components_contacts_type_telephones';
   info: {
+    description: '';
     displayName: 'Telephone';
-    icon: 'phone';
+    icon: '';
   };
   attributes: {
-    value: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    number: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+  };
+}
+
+export interface ContactsTypeVkontakte extends Struct.ComponentSchema {
+  collectionName: 'components_contacts_type_vkontaktes';
+  info: {
+    displayName: 'vkontakte';
+  };
+  attributes: {
+    link: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'#'>;
   };
 }
 
@@ -35,30 +62,28 @@ export interface ContactsTypeWebsite extends Struct.ComponentSchema {
   };
 }
 
-export interface PhotoTypesEventPhoto extends Struct.ComponentSchema {
-  collectionName: 'components_photo_types_event_photos';
+export interface ContactsTypeWhatsapp extends Struct.ComponentSchema {
+  collectionName: 'components_contacts_type_whatsapps';
   info: {
-    displayName: 'Event-photo';
-    icon: 'walk';
+    description: '';
+    displayName: 'whatsapp';
   };
   attributes: {
-    image: Schema.Attribute.Media<'images' | 'files', true> &
-      Schema.Attribute.Required;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+    number: Schema.Attribute.BigInteger &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'79999999999'>;
   };
 }
 
-export interface PhotoTypesNewsPhoto extends Struct.ComponentSchema {
-  collectionName: 'components_photo_types_news_photos';
+export interface ContactsTypeYoutube extends Struct.ComponentSchema {
+  collectionName: 'components_contacts_type_youtubes';
   info: {
-    description: '';
-    displayName: 'news-photo';
-    icon: 'alien';
+    displayName: 'youtube';
   };
   attributes: {
-    image: Schema.Attribute.Media<'images' | 'files'> &
-      Schema.Attribute.Required;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+    link: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'#'>;
   };
 }
 
@@ -66,10 +91,12 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'contacts-type.mail': ContactsTypeMail;
+      'contacts-type.telegram': ContactsTypeTelegram;
       'contacts-type.telephone': ContactsTypeTelephone;
+      'contacts-type.vkontakte': ContactsTypeVkontakte;
       'contacts-type.website': ContactsTypeWebsite;
-      'photo-types.event-photo': PhotoTypesEventPhoto;
-      'photo-types.news-photo': PhotoTypesNewsPhoto;
+      'contacts-type.whatsapp': ContactsTypeWhatsapp;
+      'contacts-type.youtube': ContactsTypeYoutube;
     }
   }
 }

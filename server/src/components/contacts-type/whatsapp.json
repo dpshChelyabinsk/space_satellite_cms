@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_contacts_type_whatsapps",
+  "info": {
+    "displayName": "whatsapp",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "biginteger",
+      "required": true,
+      "default": "79999999999"
+    }
+  }
+}

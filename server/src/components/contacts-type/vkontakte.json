@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_contacts_type_vkontaktes",
+  "info": {
+    "displayName": "vkontakte"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "default": "#",
+      "required": true
+    }
+  }
+}

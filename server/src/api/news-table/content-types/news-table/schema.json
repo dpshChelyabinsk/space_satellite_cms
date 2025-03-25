@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "news_tables",
+  "info": {
+    "singularName": "news-table",
+    "pluralName": "news-tables",
+    "displayName": "News-table",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "content": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

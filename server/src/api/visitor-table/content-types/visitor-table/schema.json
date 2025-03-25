@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "visitor_tables",
+  "info": {
+    "singularName": "visitor-table",
+    "pluralName": "visitor-tables",
+    "displayName": "Visitor-table",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "adult": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "quantity": {
+      "type": "biginteger",
+      "required": true
+    },
+    "event": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::event-table.event-table",
+      "inversedBy": "visitors"
+    }
+  }
+}

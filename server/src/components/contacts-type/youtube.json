@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_contacts_type_youtubes",
+  "info": {
+    "displayName": "youtube"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true,
+      "default": "#"
+    }
+  }
+}

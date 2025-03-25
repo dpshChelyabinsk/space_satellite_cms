@@ -369,9 +369,81 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAboutAbout extends Struct.SingleTypeSchema {
+  collectionName: 'abouts';
+  info: {
+    displayName: 'About';
+    pluralName: 'abouts';
+    singularName: 'about';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    center: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    finally: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'\u0417\u0430\u043A\u043B\u044E\u0447\u0438\u0442\u0435\u043B\u044C\u043D\u0430\u044F \u0447\u0430\u0441\u0442\u044C'>;
+    introduce: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'\u041D\u0430\u0447\u0430\u043B\u043E'>;
+    left: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::about.about'> &
+      Schema.Attribute.Private;
+    middle: Schema.Attribute.Text &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'\u0421\u0435\u0440\u0435\u0434\u0438\u043D\u0430 \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0433\u043E'>;
+    patrons: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    right: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiAlbumTableAlbumTable extends Struct.CollectionTypeSchema {
+  collectionName: 'album_tables';
+  info: {
+    description: '';
+    displayName: 'Album-table';
+    pluralName: 'album-tables';
+    singularName: 'album-table';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    begining: Schema.Attribute.Date & Schema.Attribute.Required;
+    content: Schema.Attribute.Media<'images', true> & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    ending: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::album-table.album-table'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiContactContact extends Struct.SingleTypeSchema {
   collectionName: 'contacts';
   info: {
+    description: '';
     displayName: 'Contact';
     pluralName: 'contacts';
     singularName: 'contact';
@@ -389,14 +461,177 @@ export interface ApiContactContact extends Struct.SingleTypeSchema {
       'api::contact.contact'
     > &
       Schema.Attribute.Private;
+    mail: Schema.Attribute.Component<'contacts-type.mail', false> &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
+    telegram: Schema.Attribute.Component<'contacts-type.telegram', false> &
+      Schema.Attribute.Required;
     telephone: Schema.Attribute.Component<'contacts-type.telephone', false> &
       Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    vk: Schema.Attribute.Component<'contacts-type.vkontakte', false> &
+      Schema.Attribute.Required;
     website: Schema.Attribute.Component<'contacts-type.website', false> &
       Schema.Attribute.Required;
+    whatsapp: Schema.Attribute.Component<'contacts-type.whatsapp', false> &
+      Schema.Attribute.Required;
+    youtube: Schema.Attribute.Component<'contacts-type.youtube', false> &
+      Schema.Attribute.Required;
+  };
+}
+
+export interface ApiEventTableEventTable extends Struct.CollectionTypeSchema {
+  collectionName: 'event_tables';
+  info: {
+    description: '';
+    displayName: 'Event-table';
+    pluralName: 'event-tables';
+    singularName: 'event-table';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    begining: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    content: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    ending: Schema.Attribute.DateTime;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::event-table.event-table'
+    > &
+      Schema.Attribute.Private;
+    notice: Schema.Attribute.String & Schema.Attribute.Required;
+    place: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    totalVisitors: Schema.Attribute.BigInteger;
+    type: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    visitors: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::visitor-table.visitor-table'
+    >;
+  };
+}
+
+export interface ApiNewsTableNewsTable extends Struct.CollectionTypeSchema {
+  collectionName: 'news_tables';
+  info: {
+    description: '';
+    displayName: 'News-table';
+    pluralName: 'news-tables';
+    singularName: 'news-table';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::news-table.news-table'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSatelliteSatellite extends Struct.SingleTypeSchema {
+  collectionName: 'satellites';
+  info: {
+    description: '';
+    displayName: 'Satellite';
+    pluralName: 'satellites';
+    singularName: 'satellite';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    code: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'RS40S'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    firstLine: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'1 57172U 23091G   25083.84858341  .00015221  00000+0  83848-3 0  9990'>;
+    link: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'http://celestrak.org/NORAD/elements/amateur.txt'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::satellite.satellite'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'UMKA'>;
+    publishedAt: Schema.Attribute.DateTime;
+    secondLine: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'2 57172  97.5685 139.6562 0013860 235.4522 124.5402 15.14026539 95869'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVisitorTableVisitorTable
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'visitor_tables';
+  info: {
+    description: '';
+    displayName: 'Visitor-table';
+    pluralName: 'visitor-tables';
+    singularName: 'visitor-table';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    adult: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    event: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::event-table.event-table'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::visitor-table.visitor-table'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -909,7 +1144,13 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::about.about': ApiAboutAbout;
+      'api::album-table.album-table': ApiAlbumTableAlbumTable;
       'api::contact.contact': ApiContactContact;
+      'api::event-table.event-table': ApiEventTableEventTable;
+      'api::news-table.news-table': ApiNewsTableNewsTable;
+      'api::satellite.satellite': ApiSatelliteSatellite;
+      'api::visitor-table.visitor-table': ApiVisitorTableVisitorTable;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

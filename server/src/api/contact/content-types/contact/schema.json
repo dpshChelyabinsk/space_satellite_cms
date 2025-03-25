@@ -4,7 +4,8 @@
   "info": {
     "singularName": "contact",
     "pluralName": "contacts",
-    "displayName": "Contact"
+    "displayName": "Contact",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,6 +21,36 @@
       "type": "component",
       "repeatable": false,
       "component": "contacts-type.telephone",
+      "required": true
+    },
+    "mail": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contacts-type.mail",
+      "required": true
+    },
+    "telegram": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contacts-type.telegram",
+      "required": true
+    },
+    "vk": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contacts-type.vkontakte",
+      "required": true
+    },
+    "youtube": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contacts-type.youtube",
+      "required": true
+    },
+    "whatsapp": {
+      "type": "component",
+      "repeatable": false,
+      "component": "contacts-type.whatsapp",
       "required": true
     }
   }

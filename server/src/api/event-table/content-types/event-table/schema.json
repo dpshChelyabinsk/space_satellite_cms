@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "event_tables",
+  "info": {
+    "singularName": "event-table",
+    "pluralName": "event-tables",
+    "displayName": "Event-table",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "notice": {
+      "type": "string",
+      "required": true
+    },
+    "begining": {
+      "type": "datetime",
+      "required": true
+    },
+    "ending": {
+      "type": "datetime"
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "place": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "visitors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::visitor-table.visitor-table",
+      "mappedBy": "event"
+    },
+    "totalVisitors": {
+      "type": "biginteger"
+    }
+  }
+}

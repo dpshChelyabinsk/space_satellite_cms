@@ -20,7 +20,7 @@ const contacts = {
         label: "example@example.ru"
     },
     telegram: {
-        href: "https://web.telegram.org/k/",
+        href: "https://t.me/{username}",
     },
     vk: {
         href: "https://vk.com/",
