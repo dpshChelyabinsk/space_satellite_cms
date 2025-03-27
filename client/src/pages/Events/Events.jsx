@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import classes from "./styles/Events.module.css";
-import {getEvents} from "../../services/eventService";
 import Loader from "../../components/Loaders/Loader";
-import {API_URL} from "../../config/API_CONFIG";
 import ContentContainer from "../../components/Containers/content-container/ContentContainer";
 import MainWrapper from "../../components/Containers/main-wrapper/MainWrapper";
 import CommonHeader from "../../components/Headers/CommonHeader/CommonHeader";
@@ -12,9 +10,9 @@ import ModalWrapper from "../../components/Containers/modal-wrapper/ModalWrapper
 import EventCard from "../../components/Cards/Event/EventCard";
 import EventFilter from "../../components/Filters/EventFilter/EventFilter";
 import EventPagination from "../../components/Paginations/EventPagination/EventPagination";
+import eventService from "../../api/services/EventService";
 
 const Events = () => {
-    const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const eventsPerPage = 6;
@@ -24,25 +22,18 @@ const Events = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedEvent, setSelectedEvent] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await getEvents();
-            setEvents(data);
-            setFilteredEvents(data);
-        };
-        fetchData();
-    }, []);
+    const [events, setEvents] = useState([]);
 
     useEffect(() => {
         let filtered = events;
 
         if (filter !== 'all') {
-            filtered = filtered.filter(event => event.attributes.type === filter);
+            filtered = filtered.filter(event => event.type === filter);
         }
 
         if (timeFilter !== 'all') {
             filtered = filtered.filter(event => {
-                const eventTime = new Date(event.attributes.date_start).toLocaleTimeString([], {
+                const eventTime = new Date(event.begining).toLocaleTimeString([], {
                     hour: '2-digit', minute: '2-digit'
                 });
                 return eventTime === timeFilter;
@@ -51,7 +42,7 @@ const Events = () => {
 
         if (dateFilter !== 'all') {
             filtered = filtered.filter(event => {
-                const eventDate = new Date(event.attributes.date_start).toLocaleDateString();
+                const eventDate = new Date(event.begining).toLocaleDateString();
                 return eventDate === dateFilter;
             });
         }
@@ -86,10 +77,10 @@ const Events = () => {
         setCurrentPage(1);
     };
 
-    const uniqueTimes = [...new Set(events.map(event => new Date(event.attributes.date_start).toLocaleTimeString([], {
+    const uniqueTimes = [...new Set(events.map(event => new Date(event.begining).toLocaleTimeString([], {
         hour: '2-digit', minute: '2-digit'
     })))];
-    const uniqueDates = [...new Set(events.map(event => new Date(event.attributes.date_start).toLocaleDateString()))];
+    const uniqueDates = [...new Set(events.map(event => new Date(event.begining).toLocaleDateString()))];
 
     const openModal = (eventItem) => {
         setSelectedEvent(eventItem);
@@ -101,7 +92,7 @@ const Events = () => {
         setSelectedEvent(null);
     };
 
-    const uniqueTypes = [...new Set(events.map(event => event.attributes.type))];
+    const uniqueTypes = [...new Set(events.map(event => event.type))];
 
     const [showTimeoutMessage, setShowTimeoutMessage] = useState(false); // Состояние для отображения сообщения
 
@@ -117,6 +108,13 @@ const Events = () => {
         // Очищаем таймер при размонтировании компонента
         return () => clearTimeout(timeoutId);
     }, [currentEvents]);
+
+    useEffect(() => {
+        eventService.getEventsThumbnails().then(events => {
+            setEvents(events);
+            setFilteredEvents(events);
+        });
+    }, []);
 
     return (
         <MainWrapper>
@@ -137,22 +135,22 @@ const Events = () => {
                     />
                     <div className={classes.eventWrapper}>
                         {currentEvents.length > 0 ? (currentEvents.map(eventItem => {
-                            const {date_start, date_finish, type} = eventItem.attributes;
+                            const {begining, ending, type} = eventItem;
                             const options = {
                                 year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',
                             };
-                            const startDate = new Date(date_start).toLocaleString('ru-RU', options);
-                            const endDate = date_finish ? ` - ${new Date(date_finish).toLocaleString('ru-RU', options)}` : '';
+                            const startDate = new Date(begining).toLocaleString('ru-RU', options);
+                            const endDate = ending ? ` - ${new Date(ending).toLocaleString('ru-RU', options)}` : '';
                             return (<EventCard
-                                key={eventItem.id}
-                                image={`${API_URL}${eventItem.attributes.photo.data.attributes.url}`}
+                                key={eventItem.documentId}
+                                image={eventItem.thumbnail}
                                 type={type}
                                 event={() => openModal(eventItem)}
-                                link={`/events/${eventItem.id}`}
+                                link={`/events/${eventItem.documentId}`}
                                 startDate={startDate}
                                 endDate={endDate}
-                                title={eventItem.attributes.title}
-                                place={eventItem.attributes.place}
+                                title={eventItem.title}
+                                place={eventItem.place}
                             />);
                         })) : (
                             showTimeoutMessage ? <div className={classes.notFound}>События не найдены</div> : <Loader/>
@@ -168,7 +166,7 @@ const Events = () => {
             </ContentContainer>
             {isModalOpen && (
                 <ModalWrapper>
-                    <GonnaEvent eventId={selectedEvent.id} eventName={selectedEvent.attributes.title}/>
+                    <GonnaEvent eventId={selectedEvent.documentId} eventName={selectedEvent.title}/>
                     <CancelButton onClick={closeModal}>Отмена</CancelButton>
                 </ModalWrapper>
             )}

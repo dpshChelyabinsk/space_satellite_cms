@@ -11,9 +11,10 @@ import {
 import CommonHeader from "../../components/Headers/CommonHeader/CommonHeader";
 import HomeEvent from "../../components/Cards/HomeEvent/HomeEvent";
 import EmptyArr from "../../assets/PreloadData/HomePage/Cards";
-import {getEvents} from "../../services/eventService";
 import satteliteArrow from "../../assets/Home/sattelite-arrow.svg";
 import sattelite from "../../assets/Home/sat290k.svg";
+
+import eventService from "../../api/services/EventService";
 
 const Home = () => {
 
@@ -21,16 +22,9 @@ const Home = () => {
     const [mainEvents, setMainEvents] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = await getEvents();
-                const sortedData = data.sort((a, b) => new Date(b.attributes.createdAt) - new Date(a.attributes.createdAt));
-                setMainEvents(sortedData);
-            } catch (e) {
-                console.error(`Error reason: \n ${e}`);
-            }
-        };
-        fetchData();
+        eventService.getShortEventList().then(events => {
+            setMainEvents(events);
+        });
     }, []);
 
     return (
@@ -45,20 +39,20 @@ const Home = () => {
                             {mainEvents.length > 0 ? (
                                 mainEvents.slice(0, 2).map((event, index) => (
                                     <HomeEvent
-                                        key={event.id}
-                                        title={event.attributes.title}
-                                        type={event.attributes.type}
-                                        description={event.attributes.description}
-                                        link={event.id}
+                                        key={event.documentId}
+                                        title={event.title}
+                                        type={event.type}
+                                        description={event.description}
+                                        link={event.documentId}
                                     />
                                 ))
                             ) : (
                                 emptyArr.slice(0, 2).map((item, index) => (
                                     <HomeEvent
-                                        key={item.id}
-                                        title={item.attributes.title}
-                                        type={item.attributes.type}
-                                        description={item.attributes.description}
+                                        key={item.documentId}
+                                        title={item.title}
+                                        type={item.type}
+                                        description={item.description}
                                         link={false}
                                     />))
                             )}
@@ -101,20 +95,20 @@ const Home = () => {
                             {mainEvents.length > 0 ? (
                                 mainEvents.slice(2, 6).map((event, index) => (
                                     <HomeEvent
-                                        key={event.id}
-                                        title={event.attributes.title}
-                                        type={event.attributes.type}
-                                        description={event.attributes.description}
-                                        link={event.id}
+                                        key={event.documentId}
+                                        title={event.title}
+                                        type={event.type}
+                                        description={event.description}
+                                        link={event.documentId}
                                     />
                                 ))
                             ) : (
                                 emptyArr.slice(2, 6).map((item, index) => (
                                     <HomeEvent
-                                        key={item.id}
-                                        title={item.attributes.title}
-                                        type={item.attributes.type}
-                                        description={item.attributes.description}
+                                        key={item.documentId || index}
+                                        title={item.title}
+                                        type={item.type}
+                                        description={item.description}
                                         link={false}
                                     />))
                             )}
@@ -137,20 +131,20 @@ const Home = () => {
                             {mainEvents.length > 0 ? (
                                 mainEvents.slice(6, 10).map((event, index) => (
                                     <HomeEvent
-                                        key={event.id}
-                                        title={event.attributes.title}
-                                        type={event.attributes.type}
-                                        description={event.attributes.description}
-                                        link={event.id}
+                                        key={event.documentId}
+                                        title={event.title}
+                                        type={event.type}
+                                        description={event.description}
+                                        link={event.documentId}
                                     />
                                 ))
                             ) : (
                                 emptyArr.slice(6, 10).map((item, index) => (
                                     <HomeEvent
-                                        key={item.id}
-                                        title={item.attributes.title}
-                                        type={item.attributes.type}
-                                        description={item.attributes.description}
+                                        key={item.documentId || index}
+                                        title={item.title}
+                                        type={item.type}
+                                        description={item.description}
                                         link={false}
                                     />))
                             )}

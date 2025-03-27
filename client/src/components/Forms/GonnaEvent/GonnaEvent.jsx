@@ -1,40 +1,37 @@
 import React, {useState} from 'react';
 import classes from './styles/GonnaEvent.module.css';
 import CommonButton from "../../Buttons/CommonButton/CommonButton";
-import {API_URL} from "../../../config/API_CONFIG";
 import CommonLabel from "../../Inputs/Labels/CommonLabel/CommonLabel";
 import TextInput from "../../Inputs/TextInput/TextInput";
 import RadioInput from "../../Inputs/RadioInput/RadioInput";
 
 const GonnaEvent = ({eventId, eventName}) => {
-    const [fullName, setFullName] = useState('');
-    const [age, setAge] = useState('parent');
-    const [count, setCount] = useState(1);
-    // eslint-disable-next-line
-    const [dateRegistry, setDateRegistry] = useState(new Date().toISOString());
+    const [name, setName] = useState('');
+    const [adult, setAdult] = useState(true);
+    const [quantity, setQuantity] = useState(1);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const clientData = {
-            fullName,
-            age,
-            count,
-            dateRegistry,
-            idEvent: eventId,
-            nameEvent: eventName,
+            name,
+            adult,
+            quantity: parseInt(quantity) + 1,
+            event: eventId,
         };
 
         try {
-            const res = await fetch(`${API_URL}/api/clients`, {
+            const res = await fetch(`${process.env.REACT_APP_STRAPI_API_URL}/visitor-tables`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${process.env.REACT_APP_STRAPI_ACCESS_TOKEN}`,
                 },
                 body: JSON.stringify({data: clientData}),
             });
 
             const result = await res.json();
+
             if (res.ok) {
                 alert('Вы успешно записаны, увидимся на мероприятии!');
             } else {
@@ -57,8 +54,8 @@ const GonnaEvent = ({eventId, eventName}) => {
                     id="username"
                     type="text"
                     placeholder="Иванов Иван Иванович"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                 />
             </div>
@@ -66,18 +63,18 @@ const GonnaEvent = ({eventId, eventName}) => {
                 <CommonLabel>Вы родитель или ребенок?</CommonLabel>
                 <div className={classes.form__radioGroup}>
                     <RadioInput
-                        name="age"
-                        value="parent"
-                        checked={age === 'parent'}
-                        onChange={(e) => setAge(e.target.value)}
+                        name="adult"
+                        value={true}
+                        checked={adult === true}
+                        onChange={(e) => setAdult(e.target.value === 'true')}
                     >
                         Родитель
                     </RadioInput>
                     <RadioInput
-                        name="age"
-                        value="child"
-                        checked={age === 'child'}
-                        onChange={(e) => setAge(e.target.value)}
+                        name="adult"
+                        value={false}
+                        checked={adult === false}
+                        onChange={(e) => setAdult(e.target.value === 'true')}
                     >
                         Ребенок
                     </RadioInput>
@@ -89,8 +86,8 @@ const GonnaEvent = ({eventId, eventName}) => {
                     id="childrens"
                     type="number"
                     placeholder="1"
-                    value={count}
-                    onChange={(e) => setCount(e.target.value)}
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
                     required
                 />
             </div>

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import {getEventById} from '../../services/eventService';
 import Loader from '../../components/Loaders/Loader';
-import {API_URL} from '../../config/API_CONFIG';
 import classes from './styles/EventDetails.module.css';
 
 import Back from '../../assets/Common/arrow-back.svg'
@@ -10,6 +8,7 @@ import GonnaEvent from "../../components/Forms/GonnaEvent/GonnaEvent";
 import MainWrapper from "../../components/Containers/main-wrapper/MainWrapper";
 import ContentContainer from "../../components/Containers/content-container/ContentContainer";
 import CommonButton from "../../components/Buttons/CommonButton/CommonButton";
+import eventService from "../../api/services/EventService";
 
 const EventDetails = () => {
     const {id} = useParams();
@@ -17,13 +16,14 @@ const EventDetails = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchEvent = async () => {
-            const data = await getEventById(id, 'photo');
-            setEvent(data);
-            setLoading(false);
-        };
-        fetchEvent();
-    }, [id]);
+        eventService.getEventById(id).then(event => {
+            if (event) {
+                setLoading(false);
+                setEvent(event);
+            }
+        });
+        // eslint-disable-next-line
+    }, []);
 
     if (loading) {
         return <Loader/>;
@@ -33,27 +33,25 @@ const EventDetails = () => {
         return <div className={classes.errorBox}>Event not found</div>;
     }
 
-    const eventName = event.attributes.title;
-    const eventDescription = event.attributes.description;
-    const eventStartDate = new Date(event.attributes.date_start).toLocaleString('ru-RU', {
+    const eventName = event.title;
+    const eventDescription = event.description;
+    const eventStartDate = new Date(event.begining).toLocaleString('ru-RU', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
         hour: 'numeric',
         minute: 'numeric'
     });
-    const eventEndDate = event.attributes.date_finish ? new Date(event.attributes.date_finish).toLocaleString('ru-RU', {
+    const eventEndDate = event.ending ? new Date(event.ending).toLocaleString('ru-RU', {
         day: 'numeric',
         month: 'long',
         year: 'numeric',
         hour: 'numeric',
         minute: 'numeric'
     }) : false;
-    const eventPlace = event.attributes.place;
-    const eventNotice = event.attributes.notice;
-    const eventPhotoUrl = event.attributes.photo?.data ? `${API_URL}${event.attributes.photo.data.attributes.url}` : null;
-
-    console.log("Event Data:", event);
+    const eventPlace = event.place;
+    const eventNotice = event.notice;
+    const eventPhotoUrl = event.image;
 
     return (
         <MainWrapper>
@@ -82,10 +80,10 @@ const EventDetails = () => {
                         <div className={classes.details}>
                             <div className={classes.details__container}>
                                 <h3 className={classes.details__header}>
-                                    адрес и время
+                                    место и время
                                 </h3>
                                 <p className={classes.date__line}>
-                                    Адрес: {eventPlace}
+                                    Место: {eventPlace}
                                 </p>
                                 <div className={classes.date}>
                                     <div style={{textAlign: 'left'}}>
