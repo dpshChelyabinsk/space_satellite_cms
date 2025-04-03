@@ -4,6 +4,7 @@ import CommonButton from "../../Buttons/CommonButton/CommonButton";
 import CommonLabel from "../../Inputs/Labels/CommonLabel/CommonLabel";
 import TextInput from "../../Inputs/TextInput/TextInput";
 import RadioInput from "../../Inputs/RadioInput/RadioInput";
+import eventService from "../../../api/services/EventService";
 
 const GonnaEvent = ({eventId, eventName}) => {
     const [name, setName] = useState('');
@@ -13,33 +14,23 @@ const GonnaEvent = ({eventId, eventName}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const clientData = {
+        const visitorData = {
             name,
             adult,
-            quantity: parseInt(quantity) + 1,
+            quantity: Number(quantity) + 1,
             event: eventId,
         };
 
         try {
-            const res = await fetch(`${process.env.REACT_APP_STRAPI_API_URL}/visitor-tables`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${process.env.REACT_APP_STRAPI_ACCESS_TOKEN}`,
-                },
-                body: JSON.stringify({data: clientData}),
-            });
+            const res = await eventService.registerVisitor(visitorData);
 
-            const result = await res.json();
-
-            if (res.ok) {
+            if (res?.data) {
                 alert('Вы успешно записаны, увидимся на мероприятии!');
             } else {
-                console.error('Ошибка при записи:', result);
+                console.error('Ошибка при записи:', res);
                 alert('Ошибка при записи.');
             }
         } catch (error) {
-            console.error('Ошибка при записи:', error);
             alert('Ошибка при записи.');
         }
     };

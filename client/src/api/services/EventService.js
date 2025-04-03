@@ -1,7 +1,8 @@
-import strapiClient from "../../services/StrapiClient";
+import strapiClient from "./StrapiClient";
 
 class EventService {
     baseUrl = 'event-tables';
+    regUrl = 'visitor-tables';
 
     async getShortEventList() {
         try {
@@ -31,8 +32,6 @@ class EventService {
             const res = await strapiClient.get(
                 `${this.baseUrl}?populate=content&pagination[page]=1&pagination[pageSize]=1000`
             );
-
-            console.log(res.meta.pagination)
 
             const events = res.data;
             const apiBaseUrl = process.env.REACT_APP_STRAPI_API_URL.replace('/api', '');
@@ -123,6 +122,17 @@ class EventService {
         } catch (error) {
             console.error(`Ошибка получения события с id ${id}:`, error);
             return null;
+        }
+    }
+
+    async registerVisitor(visitorData) {
+        try {
+            const res = await strapiClient.post(`${this.regUrl}`, visitorData);
+
+            return res;
+        } catch (error) {
+            console.error('Ошибка при записи на мероприятие:', error);
+            throw error;
         }
     }
 }
