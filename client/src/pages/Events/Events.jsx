@@ -11,6 +11,7 @@ import EventCard from "../../components/Cards/Event/EventCard";
 import EventFilter from "../../components/Filters/EventFilter/EventFilter";
 import EventPagination from "../../components/Paginations/EventPagination/EventPagination";
 import eventService from "../../api/services/EventService";
+import dateManipulator from "../../utils/services/DateManipulator";
 
 const Events = () => {
     const [filteredEvents, setFilteredEvents] = useState([]);
@@ -136,11 +137,21 @@ const Events = () => {
                     <div className={classes.eventWrapper}>
                         {currentEvents.length > 0 ? (currentEvents.map(eventItem => {
                             const {begining, ending, type} = eventItem;
-                            const options = {
-                                year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',
-                            };
-                            const startDate = new Date(begining).toLocaleString('ru-RU', options);
-                            const endDate = ending ? ` - ${new Date(ending).toLocaleString('ru-RU', options)}` : '';
+                            const startDate = dateManipulator.format(begining, {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
+
+                            const endDate = ending ? ` - ${dateManipulator.format(ending, {
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            })}` : '';
                             return (<EventCard
                                 key={eventItem.documentId}
                                 image={eventItem.thumbnail}

@@ -1,7 +1,10 @@
 import strapiClient from "./StrapiClient";
 
 class GalleryService {
-    baseUrl = 'album-tables';
+
+    constructor() {
+        this.baseUrl = 'album-tables';
+    }
 
     async getAlbumsThumbnails() {
         try {
@@ -68,10 +71,37 @@ class GalleryService {
 
     async getAlbumById(id) {
         try {
+            const res = await strapiClient.get(`${this.baseUrl}/${id}?populate=content`);
+            const album = res.data;
 
-        } catch (e) {
-            console.log(e);
-            return [];
+            const {
+                name,
+                documentId,
+                begining,
+                ending,
+                content,
+            } = album;
+
+            const apiBaseUrl = process.env.REACT_APP_STRAPI_API_URL.replace('/api', '');
+
+            const images = content.map(item => {
+                const src = item.formats?.large?.url
+                    ? `${apiBaseUrl}${item.formats.large.url}`
+                    : `${apiBaseUrl}${item.url}`;
+
+                return {src};
+            });
+
+            return {
+                name,
+                documentId,
+                begining,
+                ending,
+                images
+            };
+        } catch (error) {
+            console.log(`Ошибка получения фото альбома с id: ${id}`, error);
+            return null;
         }
     }
 }

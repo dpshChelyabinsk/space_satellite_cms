@@ -2,6 +2,7 @@ import React from 'react';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {About, EventDetails, Events, Albums, Home, News, NotFound, Satellite} from "../pages";
 import App from "../App";
+import AlbumDetails from "../pages/Albums/AlbumDetails";
 
 const router = createBrowserRouter([{
     path: "/", element: <App/>, // Используем Layout как обёртку
@@ -15,6 +16,8 @@ const router = createBrowserRouter([{
         path: "events/:id", element: <EventDetails/>,
     }, {
         path: "albums", element: <Albums/>,
+    },{
+        path: "albums/:id", element: <AlbumDetails/>,
     }, {
         path: "news", element: <News/>,
     }, {

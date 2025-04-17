@@ -9,6 +9,7 @@ import MainWrapper from "../../components/Containers/main-wrapper/MainWrapper";
 import ContentContainer from "../../components/Containers/content-container/ContentContainer";
 import CommonButton from "../../components/Buttons/CommonButton/CommonButton";
 import eventService from "../../api/services/EventService";
+import dateManipulator from "../../utils/services/DateManipulator";
 
 const EventDetails = () => {
     const {id} = useParams();
@@ -33,29 +34,12 @@ const EventDetails = () => {
         return <div className={classes.errorBox}>Event not found</div>;
     }
 
-    const eventName = event.title;
-    const eventDescription = event.description;
-    const eventStartDate = new Date(event.begining).toLocaleString('ru-RU', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric'
-    });
-    const eventEndDate = event.ending ? new Date(event.ending).toLocaleString('ru-RU', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric'
-    }) : false;
-    const eventPlace = event.place;
-    const eventNotice = event.notice;
-    const eventPhotoUrl = event.image;
+    const eventStartDate = dateManipulator.format(event.begining);
+    const eventEndDate = event.ending ? dateManipulator.format(event.ending) : null;
 
     return (
         <MainWrapper>
-            <div className={classes.eventPhoto} style={{backgroundImage: `url("${eventPhotoUrl}")`}} />
+            <div className={classes.eventPhoto} style={{backgroundImage: `url("${event.image}")`}} />
             <ContentContainer>
                 <div className={classes.container}>
                     <div className={classes.titleBox}>
@@ -74,7 +58,7 @@ const EventDetails = () => {
                                 </CommonButton>
                             </Link>
                         </div>
-                        <h2 className={classes.titleBoxHeader}>{eventName}</h2>
+                        <h2 className={classes.titleBoxHeader}>{event.title}</h2>
                     </div>
                     <div className={classes.eventDetailContent}>
                         <div className={classes.details}>
@@ -83,7 +67,7 @@ const EventDetails = () => {
                                     место и время
                                 </h3>
                                 <p className={classes.date__line}>
-                                    Место: {eventPlace}
+                                    Место: {event.place}
                                 </p>
                                 <div className={classes.date}>
                                     <div style={{textAlign: 'left'}}>
@@ -96,7 +80,7 @@ const EventDetails = () => {
                                     </div>
                                 </div>
                                 <p className={classes.date__line}>
-                                    Примечание: {eventNotice}
+                                    Примечание: {event.notice}
                                 </p>
                             </div>
                             <div className={classes.details__container}>
@@ -104,12 +88,12 @@ const EventDetails = () => {
                                     о мероприятии
                                 </h3>
                                 <div className={classes.date__line}>
-                                    {eventDescription}
+                                    {event.description}
                                 </div>
                             </div>
                         </div>
                         <div className={classes.event__form}>
-                            <GonnaEvent eventId={id} eventName={eventName}/>
+                            <GonnaEvent eventId={id} eventName={event.title}/>
                         </div>
                     </div>
                 </div>

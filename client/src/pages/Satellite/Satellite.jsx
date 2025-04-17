@@ -25,12 +25,11 @@ const Map = styled.div`
   top: 160px;
   width: 100%;
   max-width: 1400px;
-  height: 76.29537037037037%;
+  height: 70.29537037037037%;
   max-height: 1400px;
   object-fit: cover;
   background-size: cover;
   background-position: center;
-  background-color: white;
 `;
 
 const LegendBox = styled.div`
