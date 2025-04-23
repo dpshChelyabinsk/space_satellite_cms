@@ -155,7 +155,6 @@ const SatelliteMap = () => {
         const tleLine1 = '1 57172U 23091G   25024.60299216  .00011779  00000+0  67414-3 0  9994';
         const tleLine2 = '2 57172  97.5818  80.7827 0016775  84.1442 276.1700 15.12680628 86908';
 
-
         const getSatellitePosition = () => {
             const satrec = satellite.twoline2satrec(tleLine1, tleLine2);
             const now = new Date();

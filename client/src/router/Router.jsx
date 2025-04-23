@@ -3,6 +3,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {About, EventDetails, Events, Albums, Home, News, NotFound, Satellite} from "../pages";
 import App from "../App";
 import AlbumDetails from "../pages/Albums/AlbumDetails";
+import SatelliteV2 from "../pages/Satellite/SatelliteV2";
 
 const router = createBrowserRouter([{
     path: "/", element: <App/>, // Используем Layout как обёртку
@@ -21,7 +22,7 @@ const router = createBrowserRouter([{
     }, {
         path: "news", element: <News/>,
     }, {
-        path: "satellite", element: <Satellite/>,
+        path: "satellite", element: <SatelliteV2/>,
     }, {
         path: "*", element: <NotFound/>,
     }, {

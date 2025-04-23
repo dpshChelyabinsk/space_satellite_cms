@@ -2,6 +2,7 @@ class DateManipulator {
     constructor(locale = 'ru-RU', timeZone = 'Asia/Yekaterinburg') {
         this.locale = locale;
         this.timeZone = timeZone;
+        this.STEPS = 360;
     }
 
     format(date, options = {}) {
